@@ -40,8 +40,6 @@
 			$this->from = $from;
 			$this->subject = $subject;
 			$this->headers = ($headers ?: array());
-//$this->headers.="MIME-Version: 1.0\r\n";
-//$this->headers.="Content-Type: text/html; charset=ISO-8859-1\r\n";
 	
 			$this->message = $message;
 		}
@@ -66,7 +64,10 @@
 			if(!isset($this->headers['Cc']) && $this->cc)
 				$this->headers['Cc'] = implode(', ', self::recipientsAsArrayOfStrings($this->cc));
 			// setup message content
-		$content = '';
+		
+		$content .= "MIME-Version: 1.0\r\n";
+		$content.="Content-Type: text/html; charset=ISO-8859-1\r\n";
+
 			foreach($this->headers as $name => $value) {
 				$content .= $name.': '.$value.self::EOL;
 			}
@@ -132,7 +133,7 @@
 			}
 		}
 		protected function authenticate() {
-			//print "==> Authenticating with server...<br>";
+			//print "==> Authenticating with server...<br> either HELO or EHLO, whichever fits you";
 			$this->command('EHLO '.$this->helo);
 			if($this->secure == 'tls') {
 				return "==> Starting TLS session...<br>";
