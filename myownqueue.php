@@ -1,3 +1,16 @@
+<?php
+
+/***********
+ * Name: Inoc, Arbie S.
+ * 
+ * I use this code as a email dequeue manager for my email blasting...
+ * Hope someone got the idea..
+ * It's not yet finished as of now.. But will be, soon!'
+ * 
+ * 
+ *  (".).. i am ArbZ
+ * **************/
+
 <form method=POST>
 <input name=d type=number>
 <input type=submit name=post>
