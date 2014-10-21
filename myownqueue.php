@@ -99,25 +99,16 @@ $file= new BatchFiles();
 if(is_numeric($_POST['d']) && isset($_POST['post'])){
 for($i=0;$i<$_POST['d'];$i++){
 echo "<script>document.getElementById('st').innerHTML='Sending Batch ".$i."';</script>";
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com','3'=>'kdpublisherpro@gmail.com','4'=>'kdpublisherpro@gmail.com') );
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com') );
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com') );
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com') );
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com') );
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com','3'=>'kdpublisherpro@gmail.com','4'=>'kdpublisherpro@gmail.com') );
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com') );
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com') );
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com') );
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com') );
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com','3'=>'kdpublisherpro@gmail.com','4'=>'kdpublisherpro@gmail.com') );
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com') );
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com') );
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com') );
-$file->add("printvalue",array('1'=>'michgubz@yahoo.com','2'=>'kdpublisherpro@gmail.com') );
-
+// here you can do loops or even FETCH on sql but local storage -> variable passing of TEXT FILE is much faster than 
+// a query....
+$file->add("printvalue",array('1'=>'test@gmail.com','2'=>'test2@yahoo.com','3'=>'test3@hisdomain.com','4'=>'test4@yourdomain.com') );
 foreach($file->get_all() as $item ) {
+
+//this does the tricks, while dequeuing, it is also being sent and is deleted right after to prevent redudancy and minimize mem. usage  ...
 call_user_func_array( $item['function'], array( $item['args']) );
 $file->delete( $item['id'] );
+
+
 flush(); sleep(1);
 }
 
